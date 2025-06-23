@@ -19,3 +19,8 @@ class ProductView(BaseViewSetMixin, ReadOnlyModelViewSet):
         "retrieve": RetrieveProductSerializer,
         "create": CreateProductSerializer,
     }
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context

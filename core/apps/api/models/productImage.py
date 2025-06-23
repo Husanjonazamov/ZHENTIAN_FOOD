@@ -4,7 +4,12 @@ from django_core.models import AbstractBaseModel
 
 
 class ProductimageModel(AbstractBaseModel):
-    product = models.ForeignKey("api.ProductModel", on_delete=models.CASCADE, blank=True, null=True)
+    product = models.ForeignKey(
+        "api.ProductModel",
+        related_name="images",
+        on_delete=models.CASCADE,
+        blank=True, null=True
+    )
     image = models.ImageField(verbose_name=_("Image"), upload_to="product/images/", blank=True, null=True)
 
     def __str__(self):

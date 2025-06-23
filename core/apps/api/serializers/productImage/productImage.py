@@ -8,8 +8,13 @@ class BaseProductimageSerializer(serializers.ModelSerializer):
         model = ProductimageModel
         fields = [
             "id",
-            "name",
+            "product",
+            "image",
         ]
+        
+    def get_image(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(obj.image.url) if request else obj.iamge.url
 
 
 class ListProductimageSerializer(BaseProductimageSerializer):
@@ -24,5 +29,6 @@ class CreateProductimageSerializer(BaseProductimageSerializer):
     class Meta(BaseProductimageSerializer.Meta):
         fields = [
             "id",
-            "name",
+            "product",
+            "image"
         ]
