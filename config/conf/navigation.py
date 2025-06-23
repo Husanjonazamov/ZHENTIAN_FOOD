@@ -19,13 +19,29 @@ PAGES = [
             {
                 "title": _("Users"),
                 "icon": "group",
-                "link": reverse_lazy("admin:http_user_changelist"),
+                "link": reverse_lazy("admin:accounts_user_changelist"),
             },
+        ],
+    },
+    {
+        "title": _("Mahsulot va Kategoryalar"),
+        "separator": True,  
+        "items": [
             {
-                "title": _("Group"),
+                "title": _("Banner"),
                 "icon": "group",
-                "link": reverse_lazy("admin:auth_group_changelist"),
+                "link": reverse_lazy("admin:api_bannermodel_changelist"),
             },
+            # {
+            #     "title": _("Banner"),
+            #     "icon": "group",
+            #     "link": reverse_lazy("admin:api_bannermodel_changelist"),
+            # },
+            # {
+            #     "title": _("Banner"),
+            #     "icon": "group",
+            #     "link": reverse_lazy("admin:api_bannermodel_changelist"),
+            # },
         ],
     },
 ]
