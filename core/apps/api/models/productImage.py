@@ -4,8 +4,8 @@ from django_core.models import AbstractBaseModel
 
 
 class ProductimageModel(AbstractBaseModel):
-
-    name = models.CharField(verbose_name=_("name"), max_length=255)
+    product = models.ForeignKey("api.ProductModel", on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(verbose_name=_("Image"), upload_to="product/images/", blank=True, null=True)
 
     def __str__(self):
         return str(self.pk)

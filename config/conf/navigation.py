@@ -29,19 +29,19 @@ PAGES = [
         "items": [
             {
                 "title": _("Banner"),
-                "icon": "group",
+                "icon": "image",
                 "link": reverse_lazy("admin:api_bannermodel_changelist"),
             },
-            # {
-            #     "title": _("Banner"),
-            #     "icon": "group",
-            #     "link": reverse_lazy("admin:api_bannermodel_changelist"),
-            # },
-            # {
-            #     "title": _("Banner"),
-            #     "icon": "group",
-            #     "link": reverse_lazy("admin:api_bannermodel_changelist"),
-            # },
+            {
+                "title": _("Kategoryalar"),
+                "icon": "category",
+                "link": reverse_lazy("admin:api_categorymodel_changelist"),
+            },
+            {
+                "title": _("Mahsulotlar"),
+                "icon": "shopping_cart",
+                "link": reverse_lazy("admin:api_productmodel_changelist"),
+            },
         ],
     },
 ]
