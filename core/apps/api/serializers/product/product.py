@@ -10,7 +10,7 @@ class BaseProductSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "title",
-            "subtitle"
+            "subtitle",
             "category",
             "description",
             "link",
