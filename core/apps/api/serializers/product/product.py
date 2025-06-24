@@ -10,8 +10,10 @@ class BaseProductSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "title",
+            "subtitle"
             "category",
             "description",
+            "link",
             "image"
         ]
     
@@ -29,7 +31,6 @@ class RetrieveProductSerializer(BaseProductSerializer):
     class Meta(BaseProductSerializer.Meta):
         fields = BaseProductSerializer.Meta.fields + [
             "content",
-            "link",
             "images",
         ]
         
