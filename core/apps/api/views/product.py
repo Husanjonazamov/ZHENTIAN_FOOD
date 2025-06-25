@@ -25,6 +25,15 @@ class ProductView(BaseViewSetMixin, ReadOnlyModelViewSet):
         category_id = self.request.query_params.get("category")
         if category_id:
             queryset = queryset.filter(category_id=category_id)
+            
+
+        popular = self.request.query_params.get("popular")
+        if popular is not None:
+            if popular.lower() == "true":
+                queryset = queryset.filter(popular=True)
+            elif popular.lower() == "false":
+                queryset = queryset.filter(popular=False)
+
         return queryset
 
     def get_serializer_context(self):

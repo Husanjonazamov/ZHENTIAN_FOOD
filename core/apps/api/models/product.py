@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 
 
+
 class ProductModel(AbstractBaseModel):
     title = models.CharField(verbose_name=_("Title"), max_length=255)
     subtitle = models.CharField(verbose_name=_("Subtitle"), max_length=200, blank=True, null=True)
@@ -11,6 +12,7 @@ class ProductModel(AbstractBaseModel):
     content = models.TextField(verbose_name=_("Content"), blank=True, null=True)
     image = models.ImageField(verbose_name=_("Image"), upload_to="product/", blank=True, null=True)
     link = models.URLField(verbose_name=_("Youtube Link"), blank=True, null=True)
+    popular = models.BooleanField(default=False)
     
     def __str__(self):
         return str(self.title)

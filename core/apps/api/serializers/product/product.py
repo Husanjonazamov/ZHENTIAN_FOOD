@@ -5,6 +5,8 @@ from core.apps.api.models import ProductModel
 
 class BaseProductSerializer(serializers.ModelSerializer):
     category = serializers.SerializerMethodField()
+   
+    
     class Meta:
         model = ProductModel
         fields = [
@@ -14,7 +16,9 @@ class BaseProductSerializer(serializers.ModelSerializer):
             "category",
             "description",
             "link",
-            "image"
+            "image",
+            "popular"
+            
         ]
     
     def get_category(self, obj):
@@ -22,16 +26,27 @@ class BaseProductSerializer(serializers.ModelSerializer):
         return BaseCategorySerializer(obj.category).data
 
 
+   
+
+
+
 class ListProductSerializer(BaseProductSerializer):
     class Meta(BaseProductSerializer.Meta): ...
 
 
+
 class RetrieveProductSerializer(BaseProductSerializer):
     images = serializers.SerializerMethodField()
+    table1 = serializers.SerializerMethodField()
+    table2 = serializers.SerializerMethodField()
+    
+    
     class Meta(BaseProductSerializer.Meta):
         fields = BaseProductSerializer.Meta.fields + [
             "content",
             "images",
+            "table1",
+            "table2",
         ]
         
         
@@ -44,6 +59,16 @@ class RetrieveProductSerializer(BaseProductSerializer):
             context={"request": request}
         ).data
 
+
+
+    def get_table1(self, obj):
+        options = obj.options.filter(table="table1")
+        return [{"key": opt.key, "value": opt.value} for opt in options]
+    
+
+    def get_table2(self, obj):
+        options = obj.options.filter(table="table2")
+        return [{"key": obj.key, "value": obj.value} for obj in options]
 
 class CreateProductSerializer(BaseProductSerializer):
     class Meta(BaseProductSerializer.Meta):

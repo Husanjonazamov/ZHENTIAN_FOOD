@@ -42,6 +42,11 @@ PAGES = [
                 "icon": "shopping_cart",
                 "link": reverse_lazy("admin:api_productmodel_changelist"),
             },
+            {
+                "title": _("Mahsulot Variantlari"),
+                "icon": "tune",
+                "link": reverse_lazy("admin:api_optionsmodel_changelist"),
+            },
         ],
     },
 ]
