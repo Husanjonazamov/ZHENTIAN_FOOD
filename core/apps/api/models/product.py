@@ -17,7 +17,6 @@ class ProductModel(AbstractBaseModel):
     category = models.ForeignKey("api.CategoryModel", on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(verbose_name=_("Description"),blank=True, null=True)
     content = models.TextField(verbose_name=_("Content"), blank=True, null=True)
-    video_url = models.URLField(blank=True)
     image = models.ImageField(verbose_name=_("Image"), upload_to="product/", blank=True, null=True)
     link = models.URLField(verbose_name=_("Youtube Link"), blank=True, null=True)
     table = CKEditor5Field(config_name="default", default=load_default_description)
