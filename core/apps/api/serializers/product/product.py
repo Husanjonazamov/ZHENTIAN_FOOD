@@ -71,7 +71,6 @@ class CreateProductSerializer(serializers.ModelSerializer):
             "category",
             "description",
             "content",
-            "video_url",
             "image",
             "link",
             "popular",
