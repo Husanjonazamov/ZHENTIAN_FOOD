@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from core.apps.api.models import ProductModel
+from django.utils.text import slugify
 
 
 class BaseProductSerializer(serializers.ModelSerializer):
@@ -59,9 +60,28 @@ class RetrieveProductSerializer(BaseProductSerializer):
 
 
    
-class CreateProductSerializer(BaseProductSerializer):
-    class Meta(BaseProductSerializer.Meta):
+
+class CreateProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductModel
         fields = [
-            "id",
-            "name",
+            "title",
+            "slug",
+            "subtitle",
+            "category",
+            "description",
+            "content",
+            "video_url",
+            "image",
+            "link",
+            "popular",
+            "is_new",
+            "rate",
         ]
+
+
+
+    def create(self, validated_data):
+        if not validated_data.get("slug"):
+            validated_data["slug"] = slugify(validated_data["title"])
+        return super().create(validated_data)
