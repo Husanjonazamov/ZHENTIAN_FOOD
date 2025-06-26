@@ -11,6 +11,7 @@ from core.apps.api.serializers.category import (
 )
 
 
+
 @extend_schema(tags=["category"])
 class CategoryView(BaseViewSetMixin, ReadOnlyModelViewSet):
     queryset = CategoryModel.objects.all()
