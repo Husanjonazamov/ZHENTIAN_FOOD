@@ -1,7 +1,7 @@
 from django_core.mixins import BaseViewSetMixin
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import AllowAny
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from core.apps.api.models import CategoryModel
 from core.apps.api.serializers.category import (
@@ -13,7 +13,7 @@ from core.apps.api.serializers.category import (
 
 
 @extend_schema(tags=["category"])
-class CategoryView(BaseViewSetMixin, ReadOnlyModelViewSet):
+class CategoryView(BaseViewSetMixin, ModelViewSet):
     queryset = CategoryModel.objects.all()
     serializer_class = ListCategorySerializer
     permission_classes = [AllowAny]
