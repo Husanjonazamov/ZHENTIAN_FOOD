@@ -15,11 +15,7 @@ class ProductImageInline(TabularInline):
     extra = 2 
     
     
-    
-class OptionsInline(TabularInline):
-    model = OptionsModel
-    extra = 3
-    
+
 
 @admin.register(ProductModel)
 class ProductAdmin(ModelAdmin):
@@ -32,4 +28,4 @@ class ProductAdmin(ModelAdmin):
     )
     form = ProductForm
     list_display_links = ("title", )
-    inlines = [ProductImageInline, OptionsInline]
+    inlines = [ProductImageInline]

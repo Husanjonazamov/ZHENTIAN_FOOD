@@ -22,7 +22,8 @@ class OptionsModel(AbstractBaseModel):
         default=TableChoice.TABLE_ONE    
     )
     key = models.CharField(verbose_name=_("Key"), max_length=200, blank=True, null=True)
-    value = models.CharField(verbose_name=_("Value"), max_length=255, blank=True, null=True)  
+    value = models.JSONField(verbose_name=_("           Value"), blank=True, null=True)  
+    
     
     def __str__(self):
         return str(self.key)

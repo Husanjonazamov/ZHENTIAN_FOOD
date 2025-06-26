@@ -1,8 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
+import os 
+from django_ckeditor_5.fields import CKEditor5Field
 
 
+def load_default_description():
+    file_path = os.path.join('/code', 'resources', 'templates', 'defaults', 'description_default.html')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return f.read()
 
 class ProductModel(AbstractBaseModel):
     title = models.CharField(verbose_name=_("Title"), max_length=255)
@@ -12,6 +18,7 @@ class ProductModel(AbstractBaseModel):
     content = models.TextField(verbose_name=_("Content"), blank=True, null=True)
     image = models.ImageField(verbose_name=_("Image"), upload_to="product/", blank=True, null=True)
     link = models.URLField(verbose_name=_("Youtube Link"), blank=True, null=True)
+    table = CKEditor5Field(config_name="default", default=load_default_description)
     popular = models.BooleanField(default=False)
     
     def __str__(self):

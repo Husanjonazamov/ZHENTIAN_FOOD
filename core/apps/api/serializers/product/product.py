@@ -37,16 +37,13 @@ class ListProductSerializer(BaseProductSerializer):
 
 class RetrieveProductSerializer(BaseProductSerializer):
     images = serializers.SerializerMethodField()
-    table1 = serializers.SerializerMethodField()
-    table2 = serializers.SerializerMethodField()
     
     
     class Meta(BaseProductSerializer.Meta):
         fields = BaseProductSerializer.Meta.fields + [
             "content",
             "images",
-            "table1",
-            "table2",
+            "table"
         ]
         
         
@@ -61,15 +58,7 @@ class RetrieveProductSerializer(BaseProductSerializer):
 
 
 
-    def get_table1(self, obj):
-        options = obj.options.filter(table="table1")
-        return [{"key": opt.key, "value": opt.value} for opt in options]
-    
-
-    def get_table2(self, obj):
-        options = obj.options.filter(table="table2")
-        return [{"key": obj.key, "value": obj.value} for obj in options]
-
+   
 class CreateProductSerializer(BaseProductSerializer):
     class Meta(BaseProductSerializer.Meta):
         fields = [
