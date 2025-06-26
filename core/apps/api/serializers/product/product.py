@@ -66,8 +66,6 @@ class CreateProductSerializer(serializers.ModelSerializer):
         model = ProductModel
         fields = [
             "title",
-            "slug",
-            "subtitle",
             "category",
             "description",
             "content",
@@ -78,9 +76,3 @@ class CreateProductSerializer(serializers.ModelSerializer):
             "rate",
         ]
 
-
-
-    def create(self, validated_data):
-        if not validated_data.get("slug"):
-            validated_data["slug"] = slugify(validated_data["title"])
-        return super().create(validated_data)
