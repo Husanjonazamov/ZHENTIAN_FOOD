@@ -3,7 +3,7 @@ from rest_framework.response import Response
 import math
 
 class ProductPagination(PageNumberPagination):
-    page_size = 18
+    page_size = 12
     page_size_query_param = 'page_size'
 
     def get_paginated_response(self, data):
@@ -49,22 +49,6 @@ class BaseViewSetMixin:
                 }
             }
             return response
-
-        if getattr(self, 'action', None) == 'retrieve':
-            response.data = {
-                "status": True,
-                "data": {
-                    "links": {
-                        "previous": None,
-                        "next": None
-                    },
-                    "total_items": 1,
-                    "total_pages": 1,
-                    "page_size": 1,
-                    "current_page": 1,
-                    "results": [response.data] 
-                }
-            }
         else:
             response.data = {
                 "status": True,
