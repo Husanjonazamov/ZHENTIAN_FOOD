@@ -9,7 +9,7 @@ from .pagenation import ProductPagination
 
 
 @extend_schema(tags=["product"])
-class ProductView(BaseViewSetMixin, ModelViewSet):
+class ProductView(ModelViewSet):
     queryset = ProductModel.objects.all()
     serializer_class = ListProductSerializer
     permission_classes = [AllowAny]
