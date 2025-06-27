@@ -21,3 +21,65 @@ class ProductPagination(PageNumberPagination):
                 "results": data,
             }
         })
+
+
+class BaseViewSetMixin:
+    action_serializer_class = {}
+    action_permission_classes = {}
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        response = super().finalize_response(request, response, *args, **kwargs)
+
+        if isinstance(response.data, dict) and "status" in response.data:
+            return response
+
+        if response.status_code >= 400:
+            response.data = {
+                "status": False,
+                "data": {
+                    "links": {
+                        "previous": None,
+                        "next": None
+                    },
+                    "total_items": 0,
+                    "total_pages": 0,
+                    "page_size": 0,
+                    "current_page": 1,
+                    "results": [response.data] if isinstance(response.data, dict) else []
+                }
+            }
+            return response
+
+        if getattr(self, 'action', None) == 'retrieve':
+            response.data = {
+                "status": True,
+                "data": {
+                    "links": {
+                        "previous": None,
+                        "next": None
+                    },
+                    "total_items": 1,
+                    "total_pages": 1,
+                    "page_size": 1,
+                    "current_page": 1,
+                    "results": [response.data] 
+                }
+            }
+        else:
+            response.data = {
+                "status": True,
+                "data": response.data
+            }
+
+        return response
+
+    def get_serializer_class(self):
+        return self.action_serializer_class.get(self.action, self.serializer_class)
+
+    def get_permissions(self):
+        return [
+            permission()
+            for permission in self.action_permission_classes.get(
+                self.action, self.permission_classes
+            )
+        ]
