@@ -9,7 +9,6 @@ from core.apps.api.models import ProductModel, ProductimageModel
 
 
 
-
 class ProductImageInline(TabularInline):
     model = ProductimageModel
     extra = 2 

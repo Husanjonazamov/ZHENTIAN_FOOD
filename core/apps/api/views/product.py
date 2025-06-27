@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from core.apps.api.models import ProductModel
 from core.apps.api.serializers.product import CreateProductSerializer, ListProductSerializer, RetrieveProductSerializer
+from .pagenation import ProductPagination
 
 
 @extend_schema(tags=["product"])
@@ -12,6 +13,7 @@ class ProductView(BaseViewSetMixin, ModelViewSet):
     queryset = ProductModel.objects.all()
     serializer_class = ListProductSerializer
     permission_classes = [AllowAny]
+    pagination_class = ProductPagination
 
     action_permission_classes = {}
     action_serializer_class = {

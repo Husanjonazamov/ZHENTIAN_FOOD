@@ -129,30 +129,6 @@ def scrape_and_save_products():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from celery import shared_task
 import requests
 from bs4 import BeautifulSoup
