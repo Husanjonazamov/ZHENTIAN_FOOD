@@ -12,8 +12,17 @@ def load_default_description():
 
 class ProductModel(AbstractBaseModel):
     title = models.CharField(verbose_name=_("Title"), max_length=255)
-    subtitle = models.CharField(verbose_name=_("Subtitle"), max_length=200, blank=True, null=True)
-    category = models.ForeignKey("api.CategoryModel", on_delete=models.CASCADE, blank=True, null=True)
+    subtitle = models.CharField(
+        verbose_name=_("Subtitle"),
+        max_length=200,
+        blank=True, null=True
+    )
+    category = models.ForeignKey(
+        "api.CategoryModel",
+        on_delete=models.CASCADE,
+        related_name="product",
+        blank=True, null=True
+    )
     description = models.TextField(verbose_name=_("Description"),blank=True, null=True)
     content = models.TextField(verbose_name=_("Content"), blank=True, null=True)
     image = models.ImageField(verbose_name=_("Image"), upload_to="product/", blank=True, null=True)

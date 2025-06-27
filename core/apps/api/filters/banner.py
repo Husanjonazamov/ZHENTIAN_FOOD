@@ -4,7 +4,7 @@ from core.apps.api.models import BannerModel
 
 
 class BannerFilter(filters.FilterSet):
-    # name = filters.CharFilter(field_name="name", lookup_expr="icontains")
+    name = filters.CharFilter(field_name="name", lookup_expr="icontains")
 
     class Meta:
         model = BannerModel
